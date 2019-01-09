@@ -8,6 +8,8 @@ sap.ui.define([
 	return Controller.extend("com.sap.line.shwet28.controller.View1", {
 		onInit: function () {
 
+			// this.getView().byId('SOdiv').setVisible(false);
+
 			var self = this;
 
 			var oComboBox = this.getView().byId("Combo1");
@@ -53,9 +55,12 @@ sap.ui.define([
 			for (var i = 0; i < oArray.length; i++) {
 				var oPoint = new sap.suite.ui.microchart.InteractiveLineChartPoint();
 				var FC_LEVEL = parseFloat(oArray[i].C_LEVEL);
-				if (FC_LEVEL < 3.0) { //Threshold is 3.0
+				if (FC_LEVEL < 36.0) { //Threshold is 3.0
 					oPoint.setColor("Critical");
 					flag = 1;
+				}
+				else if(flag && FC_LEVEL>36.0){
+					flag = 0;
 				}
 				oPoint.setValue(FC_LEVEL);
 				oPoint.setLabel(oArray[i].C_TIMESTAMP);
@@ -70,9 +75,36 @@ sap.ui.define([
 			this.getView().byId("btnStart").setEnabled();
 
 			if (flag) {
-				this.getView().byId('btnTrack').setVisible();
+				// this.getView().byId('btnTrack').setVisible();
 				this.getView().byId('trackdiv').setVisible();
+				
+			
+				this.getView().byId('SOdiv').setVisible();
 
+				// var oComboBox = this.getView().byId("Combo1");
+				// var oKey = oComboBox.getSelectedKey();
+
+				var oModel1 = new sap.ui.model.odata.ODataModel(
+					'/sap/opu/odata/sap/ZSO_IOT_SRV', true);
+				var oArray1;
+				// oKey = oKey.substr(0, 1) + "P" + oKey.substr(1, 1);
+				oModel1.read("/SORDERSet(SENSOR='P"+ oKey +"')", null, [],
+					false,
+					function (oData, oResponse) {
+						oArray1 = oData;
+					});
+					
+					
+				this.getView().byId('sensorId').setValue(oArray1.SENSOR);
+				this.getView().byId('sdDocument').setValue(oArray1.SO);
+				this.getView().byId('shipToParty').setValue(oArray1.SHIPTO);
+				this.getView().byId('timestamp').setValue(oArray1.SDATE);
+
+			}
+			else{
+				// this.getView().byId('btnTrack').setVisible(false);
+				this.getView().byId('trackdiv').setVisible(false);
+				this.getView().byId('SOdiv').setVisible(false);
 			}
 		},
 
@@ -91,7 +123,7 @@ sap.ui.define([
 			// var oflex = this.getView().byId("sapUiSmallMargin");
 			// oflex.removeAllItems();
 			// this.getView().byId('sapUiSmallMargin').setVisible();
-			this.getView().byId('btnTrack').setVisible(false);
+			// this.getView().byId('btnTrack').setVisible(false);
 			this.getView().byId('trackdiv').setVisible(false);
 			this.getView().byId('startstopdiv').setVisible();
 			this.getView().byId('graphdiv').setVisible();
@@ -124,6 +156,33 @@ sap.ui.define([
 
 		getRouter: function () {
 			return sap.ui.core.UIComponent.getRouterFor(this);
+		},
+
+		onSelectionChanged: function (oEvent) {
+			// var oPoint = oEvent.getParameters().point;
+			// // window.alert(oPoint.getColor());
+			// if (oPoint.getColor() === "Critical") {
+			// 	this.getView().byId('SOdiv').setVisible();
+
+			// 	var oComboBox = this.getView().byId("Combo1");
+			// 	var oKey = oComboBox.getSelectedKey();
+
+			// 	var oModel = new sap.ui.model.odata.ODataModel(
+			// 		'/sap/opu/odata/sap/ZSO_IOT_SRV', true);
+			// 	var oArray;
+			// 	oKey = oKey.substr(0, 1) + "P" + oKey.substr(1, 1);
+			// 	oModel.read("/SORDERSet(SENSOR='" + oKey + "')", null, [],
+			// 		false,
+			// 		function (oData, oResponse) {
+			// 			oArray = oData;
+			// 		});
+			// 	this.getView().byId('sensorId').setValue(oArray.SENSOR);
+			// 	this.getView().byId('sdDocument').setValue(oArray.SO);
+			// 	this.getView().byId('shipToParty').setValue(oArray.SHIPTO);
+			// 	this.getView().byId('unloadingPoint').setValue(oArray.SDATE);
+
+			// }
+
 		},
 
 		onExit: function () {

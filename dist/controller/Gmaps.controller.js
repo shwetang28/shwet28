@@ -80,19 +80,19 @@ sap.ui.define([
 						directionsDisplay.setDirections(result);
 						var myRoute = result.routes[0].legs[0];
 						var eta = document.getElementById('eta');
-						eta.innerHTML += myRoute.duration.text;
+						eta.innerHTML = '<u>ETA:</u><br>' + myRoute.duration.text;
 						var distance = document.getElementById('distance');
-						distance.innerHTML += myRoute.distance.text;
+						distance.innerHTML = '<u>Distance:</u><br>'+myRoute.distance.text;
 						var origin = document.getElementById('origin');
-						origin.innerHTML += myRoute.start_address;
+						origin.innerHTML = '<u>Current Address:</u><br>' + myRoute.start_address;
 						var destination = document.getElementById('destination');
-						destination.innerHTML += myRoute.end_address;
+						destination.innerHTML = '<u>Destination Address:</u><br>'+myRoute.end_address;
 						// var TS= document.getElementById('TS');
 						// TS.innerHTML += newloc.C_TIMESTAMP;
 						var lat = document.getElementById('lat');
-						lat.innerHTML += newloc.C_LOCLAT;
+						lat.innerHTML = '<u>lat:</u><br>'+newloc.C_LOCLAT;
 						var long = document.getElementById('long');
-						long.innerHTML += newloc.C_LOCLONG;
+						long.innerHTML = '<u>long:</u><br>'+newloc.C_LOCLONG;
 
 					} else {
 						// window.alert("error");

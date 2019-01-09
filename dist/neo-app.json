@@ -26,6 +26,15 @@
         "name": "iot-internet-http"
       },
       "description": "SAP HANA Cloud Platform IoT Service API"
+    },
+    {
+      "path": "/sap/opu/odata",
+      "target": {
+        "type": "destination",
+        "name": "SDI1709",
+        "entryPath": "/sap/opu/odata"
+      },
+      "description": "SDI1709"
     }
   ],
   "sendWelcomeFileRedirect": true
