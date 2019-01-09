@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="UTF-8">
+
+		<title>shwet28</title>
+
+		<script id="sap-ui-bootstrap"
+			src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+			data-sap-ui-async="true"
+			data-sap-ui-libs="sap.m"
+			data-sap-ui-theme="sap_belize"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-resourceroots='{"com.sap.line.shwet28": "./"}'>
+		</script>
+
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+			<script>
+			sap.ui.getCore().attachInit(function() {
+
+				new sap.m.App ({
+					id: "idAppControl",
+					pages : [
+						new sap.m.Page({
+							title : "Interactive Line Charts with Semantic Colors",
+							enableScrolling : true,
+							content : [
+								new sap.ui.core.ComponentContainer({
+									name : "com.sap.line.shwet28",
+									settings : {
+										id : "com.sap.line.shwet28"
+									}
+								})
+							]
+						})
+					]
+				}).placeAt("content");});
+	</script>
+	</head>
+		<!--<script>-->
+		<!--	sap.ui.getCore().attachInit(function() {-->
+		<!--		new sap.m.Shell({-->
+		<!--			app: new sap.ui.core.ComponentContainer({-->
+		<!--				height : "100%",-->
+		<!--				name : "com.sap.line.shwet28"-->
+		<!--			})-->
+		<!--		}).placeAt("content");-->
+		<!--	});-->
+		<!--</script>-->
+	<body class="sapUiBody" id="content" role="application">
+	</body>
+
+</html>
